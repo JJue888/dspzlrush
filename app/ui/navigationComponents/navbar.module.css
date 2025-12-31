@@ -1,0 +1,6 @@
+.navContainer {
+    background: #007A33;
+    display: flex;
+    justify-content: space-around;
+    padding: 2.5% 0;
+}

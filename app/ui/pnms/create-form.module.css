@@ -1,0 +1,113 @@
+.formContainer {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.firstNameContainer,
+.lastNameContainer,
+.phoneNumberContainer,
+.dormContainer,
+.addressContainer,
+.roomNumberContainer {
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.firstNameInput,
+.lastNameInput,
+.phoneNumberInput,
+.dormInput,
+.addressInput,
+.roomNumberInput {
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input::placeholder {
+    color: #9ca3af;
+}
+
+.select {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.cancelButton,
+.submitButton {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.cancelButton {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
+.cancelButton:hover {
+    background-color: #e5e7eb;
+}
+
+.submitButton {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: #2563eb;
+}
+
+.cancelButton:active,
+.submitButton:active {
+    transform: scale(0.98);
+}

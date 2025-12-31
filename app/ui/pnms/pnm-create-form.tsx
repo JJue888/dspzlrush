@@ -1,16 +1,22 @@
 'use client'
 
-import {ChangeEvent, useActionState, useState} from "react";
+import {useActionState, useState} from "react";
 import classes from "./create-form.module.css";
 import {dorms} from "@/app/lib/data";
 import {State, createPNM} from "@/app/lib/actions";
+import Link from "next/link";
 
 export default function CreatePNMForm() {
 
     const initialState: State = { message: null, errors: {}};
-    const [state, formAction] = useActionState(createPNM, initialState);
+    const [state, formAction, isPending] = useActionState(createPNM, initialState);
     const [selectedDorm, setSelectedDorm] = useState("");
 
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [address, setAddress] = useState("");
+    const [roomNumber, setRoomNumber] = useState("");
 
     return (
         <form action={formAction}>
@@ -26,9 +32,16 @@ export default function CreatePNMForm() {
                             type="text"
                             placeholder="First Name"
                             className={classes.input}
-                            required
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            aria-describedby="firstName-error"
                         />
                     </div>
+                    {state.errors?.firstName && (
+                        <p id="firstName-error" className={classes.error}>
+                            {state.errors.firstName[0]}
+                        </p>
+                    )}
                 </div>
 
                 <div className={classes.lastNameContainer}>
@@ -42,9 +55,16 @@ export default function CreatePNMForm() {
                             type="text"
                             placeholder="Last Name"
                             className={classes.input}
-                            required
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            aria-describedby="lastName-error"
                         />
                     </div>
+                    {state.errors?.lastName && (
+                        <p id="lastName-error" className={classes.error}>
+                            {state.errors.lastName[0]}
+                        </p>
+                    )}
                 </div>
 
                 <div className={classes.phoneNumberContainer}>
@@ -58,9 +78,16 @@ export default function CreatePNMForm() {
                             type="text"
                             placeholder="123-456-7890"
                             className={classes.input}
-                            required
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            aria-describedby="phoneNumber-error"
                         />
                     </div>
+                    {state.errors?.phoneNumber && (
+                        <p id="phoneNumber-error" className={classes.error}>
+                            {state.errors.phoneNumber[0]}
+                        </p>
+                    )}
                 </div>
 
                 <div className={classes.dormContainer}>
@@ -74,6 +101,7 @@ export default function CreatePNMForm() {
                             className={classes.select}
                             value={selectedDorm}
                             onChange={(e) => setSelectedDorm(e.target.value)}
+                            aria-describedby="dorm-error"
                         >
                             <option value="">Choose a dorm</option>
                             {dorms.map((dorm) => (
@@ -83,6 +111,11 @@ export default function CreatePNMForm() {
                             ))}
                         </select>
                     </div>
+                    {/*{state.errors?.location && typeof state.errors.location === 'object' && state.errors.location.dorm && (*/}
+                    {/*    <p id="dorm-error" className={classes.error}>*/}
+                    {/*        {state.errors.location.dorm[0]}*/}
+                    {/*    </p>*/}
+                    {/*)}*/}
                 </div>
 
                 {selectedDorm === "Off Campus" ? (
@@ -97,9 +130,16 @@ export default function CreatePNMForm() {
                                 type="text"
                                 placeholder="Address"
                                 className={classes.input}
-                                required
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                                aria-describedby="address-error"
                             />
                         </div>
+                        {/*{state.errors?.location && typeof state.errors.location === 'object' && state.errors.location.address && (*/}
+                        {/*    <p id="address-error" className={classes.error}>*/}
+                        {/*        {state.errors.location?.address[0]}*/}
+                        {/*    </p>*/}
+                        {/*)}*/}
                     </div>
                 ) : selectedDorm && (
                     <div className={classes.roomNumberContainer}>
@@ -113,18 +153,29 @@ export default function CreatePNMForm() {
                                 type="text"
                                 placeholder="123"
                                 className={classes.input}
-                                required
+                                value={roomNumber}
+                                onChange={(e) => setRoomNumber(e.target.value)}
+                                aria-describedby="roomNumber-error"
                             />
                         </div>
+                        {/*{state.errors?.location && typeof state.errors.location === 'object' && state.errors.location.roomNumber && (*/}
+                        {/*    <p id="roomNumber-error" className={classes.error}>*/}
+                        {/*        {state.errors.location.roomNumber[0]}*/}
+                        {/*    </p>*/}
+                        {/*)}*/}
                     </div>
                 )}
 
                 <div className={classes.buttonGroup}>
-                    <button type="button" className={classes.cancelButton}>
+                    <Link className={classes.cancelButton} href="/dashboard/pnms">
                         Cancel
-                    </button>
-                    <button type="submit" className={classes.submitButton}>
-                        Submit
+                    </Link>
+                    <button
+                        type="submit"
+                        className={classes.submitButton}
+                        disabled={isPending}
+                    >
+                        {isPending ? 'Submitting...' : 'Submit'}
                     </button>
                 </div>
             </div>

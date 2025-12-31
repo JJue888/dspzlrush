@@ -1,13 +1,11 @@
-export default function createPNM() {
+'use client'
 
+import CreatePNMForm from "@/app/ui/pnms/pnm-create-form";
+
+export default function Page() {
     return (
-        <>
-            <div className={imageContainer}>
-
-            </div>
-            <form>
-
-            </form>
-        </>
+        <main>
+            <CreatePNMForm />
+        </main>
     )
 }
